@@ -1,7 +1,7 @@
 {
   "name": "postcss-wrap-plugin",
   "author": "DominicTylor13@gmail.com",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Postcss plugin for add wrapper to your styles",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -19,7 +19,8 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "test": "yarn build && postcss-tape --plugin dist/plugin.js --config tests/**.tape.js"
+    "eslint": "eslint 'src/**/*.{js,ts}' --fix",
+    "test": "postcss-tape --config tests/**.tape.js --plugin dist/index.js --fixtures tests/fixtures"
   },
   "keywords": [
     "postcss",
@@ -27,14 +28,42 @@
     "wrap styles",
     "webpack"
   ],
+  "peerDependencies": {
+    "postcss": "*"
+  },
   "devDependencies": {
-    "postcss": "7.0.26",
-    "postcss-tape": "5.0.2",
     "@babel/core": "7.8.4",
     "@babel/runtime": "7.8.4",
+    "@typescript-eslint/eslint-plugin": "2.19.2",
+    "@typescript-eslint/parser": "2.19.2",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "husky": "4.2.3",
+    "lint-staged": "10.0.7",
+    "postcss": "7.0.26",
+    "postcss-tape": "5.0.2",
+    "prettier": "^1.19.1",
     "rollup": "1.31.1",
     "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-peer-deps-external": "2.2.2",
+    "rollup-plugin-terser": "^5.2.0",
     "rollup-plugin-typescript2": "0.26.0",
     "typescript": "3.7.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/\\*.{json,css,less,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/\\*.{js,ts}": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
