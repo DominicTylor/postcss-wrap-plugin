@@ -1,0 +1,24 @@
+.test-wrap1 p, [test-wrap="2"] p {
+    background: gray;
+    position: absolute;
+    transform: translate(22gd);
+}
+
+.test-wrap1 #root .class.active [disabled]:hover,
+[test-wrap="2"] #root .class.active [disabled]:hover {
+    font-family: "Times New Roman", Times, serif;
+}
+
+.test-wrap1 div, .test-wrap1 class, .test-wrap1 .class div, .test-wrap1 div .class,
+[test-wrap="2"] div, [test-wrap="2"] class, [test-wrap="2"] .class div, [test-wrap="2"] div .class {
+    color: wheat;
+    padding: 33px;
+    margin: 124px 124px 23px 122px;
+    float: right;
+}
+
+.test-wrap1 h1, .test-wrap1 #id, .test-wrap1 [data-atr], .test-wrap1 [data-atr]:disabled,
+.test-wrap1 #id.class.second.third, [test-wrap="2"] h1, [test-wrap="2"] #id, [test-wrap="2"] [data-atr],
+[test-wrap="2"] [data-atr]:disabled, [test-wrap="2"] #id.class.second.third {
+    background-image: url("https://mdn.mozillademos.org/files/11983/starsolid.gif");
+}

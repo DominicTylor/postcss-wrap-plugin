@@ -1,0 +1,23 @@
+@-webkit-keyframes NAME-YOUR-ANIMATION {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-moz-keyframes NAME-YOUR-ANIMATION {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-o-keyframes NAME-YOUR-ANIMATION {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes NAME-YOUR-ANIMATION {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.test-wrap #box {
+    -webkit-animation: NAME-YOUR-ANIMATION 5s infinite;
+    -moz-animation:    NAME-YOUR-ANIMATION 5s infinite;
+    -o-animation:      NAME-YOUR-ANIMATION 5s infinite;
+    animation:         NAME-YOUR-ANIMATION 5s infinite;
+}

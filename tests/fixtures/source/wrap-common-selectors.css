@@ -1,0 +1,20 @@
+p {
+    background: gray;
+    position: absolute;
+    transform: translate(22gd);
+}
+
+#root .class.active [disabled]:hover {
+    font-family: "Times New Roman", Times, serif;
+}
+
+div, .class, .class div, div .class {
+    color: wheat;
+    padding: 33px;
+    margin: 124px 124px 23px 122px;
+    float: right;
+}
+
+h1, #id, [data-atr], [data-atr]:disabled, #id.class.second.third {
+    background-image: url("https://mdn.mozillademos.org/files/11983/starsolid.gif");
+}

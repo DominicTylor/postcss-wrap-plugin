@@ -1,0 +1,37 @@
+.text1 {
+    font-size: 16px;
+}
+
+@media (min-width: 1200px) {
+    .text1 {
+        font-size: 20px;
+    }
+}
+
+#id div.as input:hover {
+    font-size: 20px;
+}
+
+@media (max-width: 1199px) {
+    #id div.as input:hover, button.as:active {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .something {
+        border: 1px solid #333;
+    }
+}
+
+@media only screen and (min-height: 768px) and (orientation: landscape) {
+    [data-atr=true] {
+        padding: 30px;
+    }
+}
+
+@media only screen and (min-width: 768px), (min-resolution: 150dpi) {
+    .tests {
+        padding: 30px;
+    }
+}

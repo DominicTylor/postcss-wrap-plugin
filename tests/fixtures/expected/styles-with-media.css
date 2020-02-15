@@ -1,0 +1,37 @@
+#test-wrap .text1 {
+    font-size: 16px;
+}
+
+@media (min-width: 1200px) {
+    #test-wrap .text1 {
+        font-size: 20px;
+    }
+}
+
+#test-wrap #id div.as input:hover {
+    font-size: 20px;
+}
+
+@media (max-width: 1199px) {
+    #test-wrap #id div.as input:hover, #test-wrap button.as:active {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    #test-wrap .something {
+        border: 1px solid #333;
+    }
+}
+
+@media only screen and (min-height: 768px) and (orientation: landscape) {
+    #test-wrap [data-atr=true] {
+        padding: 30px;
+    }
+}
+
+@media only screen and (min-width: 768px), (min-resolution: 150dpi) {
+    #test-wrap .tests {
+        padding: 30px;
+    }
+}
