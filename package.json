@@ -1,15 +1,40 @@
 {
   "name": "postcss-wrap-plugin",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": "DominicTylor13@gmail.com",
+  "version": "0.0.1",
+  "description": "Postcss plugin for add wrapper to your styles",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DominicTylor/postcss-wrap-plugin"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DominicTylor/postcss-wrap-plugin/issues"
+  },
+  "homepage": "https://github.com/DominicTylor/postcss-wrap-plugin#readme",
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w",
+    "test": "yarn build && postcss-tape --plugin dist/plugin.js --config tests/**.tape.js"
+  },
+  "keywords": [
+    "postcss",
+    "plugin",
+    "wrap styles",
+    "webpack"
+  ],
   "devDependencies": {
-    "postcss": "^7.0.26"
+    "postcss": "7.0.26",
+    "postcss-tape": "5.0.2",
+    "@babel/core": "7.8.4",
+    "@babel/runtime": "7.8.4",
+    "rollup": "1.31.1",
+    "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-typescript2": "0.26.0",
+    "typescript": "3.7.5"
   }
 }
