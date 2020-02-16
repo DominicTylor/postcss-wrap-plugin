@@ -1,3 +1,4 @@
 import PostCSS from 'postcss';
-declare const _default: PostCSS.Plugin<unknown>;
+import { IOptions } from './types';
+declare const _default: PostCSS.Plugin<IOptions>;
 export default _default;

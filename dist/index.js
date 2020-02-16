@@ -73,7 +73,7 @@ var WrapPlugin = /** @class */ (function () {
             if (_this.handleRootTags === IHandleRootTags['replace']) {
                 return wrapSelector + "." + selector;
             }
-            throw new Error('Incorrect value for handleRootTags options');
+            throw new Error('postcss-wrap-plugin: incorrect value for handleRootTags options');
         })
             .join(', ');
     };
@@ -109,7 +109,7 @@ var WrapPlugin = /** @class */ (function () {
     WrapPlugin.prototype.runWrap = function () {
         var _this = this;
         return function (css) {
-            return css.walkRules(function (cssRule) {
+            css.walkRules(function (cssRule) {
                 if (_this.checkIncludeCssRule(cssRule)) {
                     var selector = cssRule.selector;
                     cssRule.selector = _this.wrapCssRuleSelector(selector);
@@ -119,6 +119,7 @@ var WrapPlugin = /** @class */ (function () {
     };
     return WrapPlugin;
 }());
+
 var index = PostCSS.plugin('postcss-wrap-plugin', function () {
     var options = [];
     for (var _i = 0; _i < arguments.length; _i++) {

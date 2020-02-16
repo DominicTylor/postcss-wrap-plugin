@@ -20,8 +20,8 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "eslint": "eslint 'src/**/*.{js,ts}' --fix",
-    "jest": "jest",
-    "test": "yarn build && postcss-tape --config tests/acceptance.tape.js --plugin dist/index.js --fixtures tests/fixtures"
+    "jest": "jest --coverage",
+    "test": "yarn jest && yarn build && postcss-tape --config tests/acceptance.tape.js --plugin dist/index.js --fixtures tests/fixtures"
   },
   "keywords": [
     "postcss",
