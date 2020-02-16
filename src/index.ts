@@ -43,6 +43,8 @@ class WrapPlugin {
     }
 
     isRootTag(selector: string): boolean {
+        ROOT_TAG_REGEXP.lastIndex = 0;
+
         return ROOT_TAG_REGEXP.test(selector);
     }
 
