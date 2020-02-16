@@ -1,0 +1,25 @@
+html {
+    border: 1px solid #333;
+}
+
+body {
+    padding: 10000px;
+}
+
+html, body,
+html body a {
+    background: white;
+}
+
+html.class body div,
+html[data-atr=true] body#dody .ccc {
+    position: center;
+}
+
+#ahtml, .bodydody, body[data=atr] {
+    position: center;
+}
+
+p {
+    margin-bottom: 22px;
+}

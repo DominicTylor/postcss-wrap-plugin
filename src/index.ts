@@ -52,10 +52,7 @@ class WrapPlugin {
         return this.wrapSelectors
             .map((wrapSelector: string) => {
                 if (this.handleRootTags === IHandleRootTags['remove']) {
-                    return (
-                        wrapSelector +
-                        selector.replace(ROOT_TAG_REGEXP, '').trim()
-                    );
+                    return wrapSelector + selector.replace(ROOT_TAG_REGEXP, '');
                 }
 
                 if (this.handleRootTags === IHandleRootTags['replace']) {

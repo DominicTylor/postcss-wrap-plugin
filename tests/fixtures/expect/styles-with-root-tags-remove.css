@@ -1,0 +1,23 @@
+#test {
+    border: 1px solid #333;
+}
+
+#test {
+    padding: 10000px;
+}
+
+#test, #test, #test  a {
+    background: white;
+}
+
+#test.class  div, #test[data-atr=true] #dody .ccc {
+    position: center;
+}
+
+#test #ahtml, #test .bodydody, #test[data=atr] {
+    position: center;
+}
+
+#test p {
+    margin-bottom: 22px;
+}
