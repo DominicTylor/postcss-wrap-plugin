@@ -1,7 +1,7 @@
 {
   "name": "postcss-wrap-plugin",
   "author": "DominicTylor13@gmail.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Postcss plugin for add wrapper to your styles",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
