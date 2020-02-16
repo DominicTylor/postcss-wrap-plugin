@@ -33,6 +33,7 @@
     "node_modules",
     "build",
     "dist",
-    "rollup.config.js"
+    "rollup.config.js",
+    "src/*.spec.ts"
   ]
 }
