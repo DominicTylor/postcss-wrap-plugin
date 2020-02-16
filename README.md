@@ -6,7 +6,8 @@ Plugin for help you to wrap your styles into some selectors.
 
 Usage example:
 
-######[webpack.config]
+###### [webpack.config]
+
 ```
 require('postcss-wrap-plugins')({
   loader: require.resolve('postcss-loader'),
@@ -20,7 +21,7 @@ require('postcss-wrap-plugins')({
   },
 ```
 
-###api
+### api
 
 `wrapSelector` - required params, your wrap selector or array of selectors
 ```
