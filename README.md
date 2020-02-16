@@ -9,23 +9,24 @@ Usage example:
 ###### [webpack.config]
 
 ```
-require('postcss-wrap-plugins')({
+{
   loader: require.resolve('postcss-loader'),
   options: {
     ident: 'postcss',
     plugins: () => [
-      require('postcss-wrap-plugins')({
+      require('postcss-wrap-plugin')({
         wrapSelector: ['#test', 'div ~']
       }),
     ],
   },
+}
 ```
 
 ### api
 
 `wrapSelector` - required params, your wrap selector or array of selectors
 ```
-require('postcss-wrap-plugins')({
+require('postcss-wrap-plugin')({
     wrapSelector: ['#test', '#test ~'],
 }),
 ORIGINAL STYLE
@@ -39,7 +40,7 @@ RESULT STYLE
 ```
 OR
 ```
-require('postcss-wrap-plugins')({
+require('postcss-wrap-plugin')({
     wrapSelector: '#test',
 }),
 ORIGINAL STYLE
@@ -56,7 +57,7 @@ RESULT STYLE
 
 when using option `replace` - tags will be transform to class, like a `body -> .body`, `html -> .html`
 ```
-require('postcss-wrap-plugins')({
+require('postcss-wrap-plugin')({
     wrapSelector: '#test',
     handleRootTags: 'replace',
 }),
@@ -71,7 +72,7 @@ RESULT STYLE
 ```
 when using option `remove` - tags will be remove from selector
 ```
-require('postcss-wrap-plugins')({
+require('postcss-wrap-plugin')({
     wrapSelector: '#test',
     handleRootTags: 'remove',
 }),
@@ -86,7 +87,7 @@ RESULT STYLE
 ```
 when options is not setup, root tags also will be wrapped
 ```
-require('postcss-wrap-plugins')({
+require('postcss-wrap-plugin')({
     wrapSelector: '#test',
 }),
 ORIGINAL STYLE
