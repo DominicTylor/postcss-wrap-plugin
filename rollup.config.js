@@ -28,7 +28,7 @@ export default {
             rollupCommonJSResolveHack: true,
             clean: true,
         }),
-        //terser(),
+        terser(),
         commonjs(),
         cleanup({
             comments: 'none',
