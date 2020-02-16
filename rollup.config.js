@@ -12,7 +12,7 @@ export default {
         {
             file: pkg.main,
             format: 'cjs',
-            exports: 'named',
+            preserveModules: false,
             sourcemap: true,
         },
         {
@@ -28,7 +28,7 @@ export default {
             rollupCommonJSResolveHack: true,
             clean: true,
         }),
-        terser(),
+        //terser(),
         commonjs(),
         cleanup({
             comments: 'none',

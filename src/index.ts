@@ -100,8 +100,8 @@ class WrapPlugin {
     }
 
     runWrap() {
-        return (css: Rule): void => {
-            css.walkRules((cssRule: Rule) => {
+        return (css: Rule): boolean | void => {
+            return css.walkRules((cssRule: Rule) => {
                 if (this.checkIncludeCssRule(cssRule)) {
                     const { selector } = cssRule;
 
@@ -112,13 +112,8 @@ class WrapPlugin {
     }
 }
 
-const myPlugin: PostCSS.Plugin<string> = PostCSS.plugin(
-    'postcss-wrap-plugin',
-    (...options) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        return new WrapPlugin(...options).runWrap();
-    },
-);
-
-module.exports = myPlugin;
+export default PostCSS.plugin<IOptions>('postcss-wrap-plugin', (...options) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    return new WrapPlugin(...options).runWrap();
+});
