@@ -2,9 +2,7 @@
     color: #555;
 }
 
-.navbar-default .navbar-nav > li > a.active,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
+.navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #555;
     background-color: #e7e7e7;
 }
@@ -115,6 +113,7 @@ body {
     background: url(../img/cats.png) bottom left no-repeat;
     border-bottom-left-radius: 6px
 }
+
 .package__link:active, .package__link:focus, .package__link:hover, .package__link:link, .package__link:visited {
     color: #1698d9;
     transition: all .1s linear

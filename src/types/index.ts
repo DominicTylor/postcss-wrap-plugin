@@ -1,5 +1,10 @@
 export type IWrapSelector = string | string[];
 
+export enum IHandleRootTags {
+    'replace' = 'replace',
+    'remove' = 'remove',
+}
 export type IOptions = {
-    isReplaceRootTags?: boolean;
+    wrapSelector: IWrapSelector;
+    handleRootTags?: IHandleRootTags;
 };

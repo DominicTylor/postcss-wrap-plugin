@@ -1,45 +1,27 @@
-#test-wrap .page-header a h1,
-.test-wrap2 ~ .page-header a h1,
-#test-wrap3 ~ div .page-header a h1 {
+#test-wrap .page-header a h1, .test-wrap2 ~ .page-header a h1, #test-wrap3 ~ div .page-header a h1 {
     color: #555;
 }
 
-#test-wrap .navbar-default .navbar-nav > li > a.active,
-#test-wrap .navbar-default .navbar-nav > .active > a:hover,
-#test-wrap .navbar-default .navbar-nav > .active > a:focus,
-.test-wrap2 ~ .navbar-default .navbar-nav > li > a.active,
-.test-wrap2 ~ .navbar-default .navbar-nav > .active > a:hover,
-.test-wrap2 ~ .navbar-default .navbar-nav > .active > a:focus,
-#test-wrap3 ~ div .navbar-default .navbar-nav > li > a.active,
-#test-wrap3 ~ div .navbar-default .navbar-nav > .active > a:hover,
-#test-wrap3 ~ div .navbar-default .navbar-nav > .active > a:focus {
+#test-wrap .navbar-default .navbar-nav > li > a.active, .test-wrap2 ~ .navbar-default .navbar-nav > li > a.active, #test-wrap3 ~ div .navbar-default .navbar-nav > li > a.active, #test-wrap .navbar-default .navbar-nav > .active > a:hover, .test-wrap2 ~ .navbar-default .navbar-nav > .active > a:hover, #test-wrap3 ~ div .navbar-default .navbar-nav > .active > a:hover, #test-wrap .navbar-default .navbar-nav > .active > a:focus, .test-wrap2 ~ .navbar-default .navbar-nav > .active > a:focus, #test-wrap3 ~ div .navbar-default .navbar-nav > .active > a:focus {
     color: #555;
     background-color: #e7e7e7;
 }
 
-#test-wrap .songs .rating,
-.test-wrap2 ~ .songs .rating,
-#test-wrap3 ~ div .songs .rating {
+#test-wrap .songs .rating, .test-wrap2 ~ .songs .rating, #test-wrap3 ~ div .songs .rating {
     color: #aaa;
     font-size: 1.1em;
 }
 
-#test-wrap a.star-rating,
-.test-wrap2 ~ a.star-rating,
-#test-wrap3 ~ div a.star-rating {
+#test-wrap a.star-rating, .test-wrap2 ~ a.star-rating, #test-wrap3 ~ div a.star-rating {
     color: inherit;
     text-decoration: none;
 }
 
-#test-wrap .page-header a:hover,
-.test-wrap2 ~ .page-header a:hover,
-#test-wrap3 ~ div .page-header a:hover {
+#test-wrap .page-header a:hover, .test-wrap2 ~ .page-header a:hover, #test-wrap3 ~ div .page-header a:hover {
     text-decoration: none;
 }
 
-#test-wrap .nav-tabs > li:first-child > a.active:after,
-.test-wrap2 ~ .nav-tabs > li:first-child > a.active:after,
-#test-wrap3 ~ div .nav-tabs > li:first-child > a.active:after {
+#test-wrap .nav-tabs > li:first-child > a.active:after, .test-wrap2 ~ .nav-tabs > li:first-child > a.active:after, #test-wrap3 ~ div .nav-tabs > li:first-child > a.active:after {
     content: '';
     display: block;
     width: 3px;
@@ -51,9 +33,7 @@
     bottom: -5px;
 }
 
-#test-wrap .form-group textarea,
-.test-wrap2 ~ .form-group textarea,
-#test-wrap3 ~ div .form-group textarea {
+#test-wrap .form-group textarea, .test-wrap2 ~ .form-group textarea, #test-wrap3 ~ div .form-group textarea {
     width: 100%;
     height: 150px;
 }
@@ -70,34 +50,24 @@
     }
 }
 
-#test-wrap #box,
-.test-wrap2 ~ #box,
-#test-wrap3 ~ div #box {
+#test-wrap #box, .test-wrap2 ~ #box, #test-wrap3 ~ div #box {
     animation: fontbulger 2s infinite;
 }
 
-#test-wrap .sorting-link:hover,
-.test-wrap2 ~ .sorting-link:hover,
-#test-wrap3 ~ div .sorting-link:hover {
+#test-wrap .sorting-link:hover, .test-wrap2 ~ .sorting-link:hover, #test-wrap3 ~ div .sorting-link:hover {
     text-decoration: none;
 }
 
-#test-wrap .song-filter-search-panel .sorting-link + .sorting-link,
-.test-wrap2 ~ .song-filter-search-panel .sorting-link + .sorting-link,
-#test-wrap3 ~ div .song-filter-search-panel .sorting-link + .sorting-link {
+#test-wrap .song-filter-search-panel .sorting-link + .sorting-link, .test-wrap2 ~ .song-filter-search-panel .sorting-link + .sorting-link, #test-wrap3 ~ div .song-filter-search-panel .sorting-link + .sorting-link {
     margin-left: 5px;
 }
 
-#test-wrap .sorting-panel,
-.test-wrap2 ~ .sorting-panel,
-#test-wrap3 ~ div .sorting-panel {
+#test-wrap .sorting-panel, .test-wrap2 ~ .sorting-panel, #test-wrap3 ~ div .sorting-panel {
     float: left;
 }
 
 @media (max-width: 690px) {
-    #test-wrap .sorting-panel,
-    .test-wrap2 ~ .sorting-panel,
-    #test-wrap .sorting-panel {
+    #test-wrap .sorting-panel, .test-wrap2 ~ .sorting-panel, #test-wrap3 ~ div .sorting-panel {
         margin-bottom: 5px;
     }
 }
@@ -109,42 +79,30 @@
     font-style: normal
 }
 
-#test-wrap.html,
-.test-wrap2 ~.html,
-#test-wrap3 ~ div.html {
+#test-wrap.html, .test-wrap2 ~.html, #test-wrap3 ~ div.html {
     font-size: 10px
 }
 
-#test-wrap .container, #test-wrap.body,
-.test-wrap2 ~ .container, .test-wrap2 ~ .body,
-#test-wrap3 ~ div .container, #test-wrap3 ~ div.body {
+#test-wrap .container, .test-wrap2 ~ .container, #test-wrap3 ~ div .container, #test-wrap.body, .test-wrap2 ~.body, #test-wrap3 ~ div.body {
     font-size: 1.4rem
 }
 
-#test-wrap *, #test-wrap ::after, #test-wrap ::before,
-.test-wrap2 ~ *, .test-wrap2 ~ ::after, .test-wrap2 ~ ::before,
-#test-wrap3 ~ div *, #test-wrap3 ~ div ::after, #test-wrap3 ~ div ::before {
+#test-wrap *, .test-wrap2 ~ *, #test-wrap3 ~ div *, #test-wrap ::after, .test-wrap2 ~ ::after, #test-wrap3 ~ div ::after, #test-wrap ::before, .test-wrap2 ~ ::before, #test-wrap3 ~ div ::before {
     box-sizing: border-box
 }
 
-#test-wrap.body,
-.test-wrap2 ~.body,
-#test-wrap3 ~ div.body {
+#test-wrap.body, .test-wrap2 ~.body, #test-wrap3 ~ div.body {
     color: #000;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     line-height: 1.2;
     min-width: 310px
 }
 
-#test-wrap .package + .package,
-.test-wrap2 ~ .package + .package,
-#test-wrap3 ~ div .package + .package {
+#test-wrap .package + .package, .test-wrap2 ~ .package + .package, #test-wrap3 ~ div .package + .package {
     margin-left: 10px
 }
 
-#test-wrap .package__content::after,
-.test-wrap2 ~ .package__content::after,
-#test-wrap3 ~ div .package__content::after {
+#test-wrap .package__content::after, .test-wrap2 ~ .package__content::after, #test-wrap3 ~ div .package__content::after {
     content: " ";
     display: block;
     height: 268px;
@@ -156,23 +114,17 @@
     border-bottom-left-radius: 6px
 }
 
-#test-wrap .package__link:active, #test-wrap .package__link:focus, #test-wrap .package__link:hover, #test-wrap .package__link:link, #test-wrap .package__link:visited,
-.test-wrap2 ~ .package__link:active, .test-wrap2 ~ .package__link:focus, .test-wrap2 ~ .package__link:hover, .test-wrap2 ~ .package__link:link, .test-wrap2 ~ .package__link:visited,
-#test-wrap3 ~ div .package__link:active, #test-wrap3 ~ div .package__link:focus, #test-wrap3 ~ div .package__link:hover, #test-wrap3 ~ div .package__link:link, #test-wrap3 ~ div .package__link:visited {
+#test-wrap .package__link:active, .test-wrap2 ~ .package__link:active, #test-wrap3 ~ div .package__link:active, #test-wrap .package__link:focus, .test-wrap2 ~ .package__link:focus, #test-wrap3 ~ div .package__link:focus, #test-wrap .package__link:hover, .test-wrap2 ~ .package__link:hover, #test-wrap3 ~ div .package__link:hover, #test-wrap .package__link:link, .test-wrap2 ~ .package__link:link, #test-wrap3 ~ div .package__link:link, #test-wrap .package__link:visited, .test-wrap2 ~ .package__link:visited, #test-wrap3 ~ div .package__link:visited {
     color: #1698d9;
     transition: all .1s linear
 }
 
 @media (max-width: 1016px) {
-    #test-wrap .package,
-    .test-wrap2 ~ .package,
-    #test-wrap3 ~ div .package {
+    #test-wrap .package, .test-wrap2 ~ .package, #test-wrap3 ~ div .package {
         margin-bottom: 20px
     }
 
-    #test-wrap .container,
-    .test-wrap2 ~ .container,
-    #test-wrap3 ~ div .container {
+    #test-wrap .container, .test-wrap2 ~ .container, #test-wrap3 ~ div .container {
         -webkit-justify-content: space-around;
         -ms-flex-pack: distribute;
         justify-content: space-around
@@ -180,33 +132,23 @@
 }
 
 @media (max-width: 350px) {
-    #test-wrap.html,
-    .test-wrap2 ~.html,
-    #test-wrap3 ~ div.html {
+    #test-wrap.html, .test-wrap2 ~.html, #test-wrap3 ~ div.html {
         font-size: 9px
     }
 
-    #test-wrap.body,
-    .test-wrap2 ~.body,
-    #test-wrap3 ~ div.body {
+    #test-wrap.body, .test-wrap2 ~.body, #test-wrap3 ~ div.body {
         margin-bottom: 10px;
     }
 
-    #test-wrap .container,
-    .test-wrap2 ~ .container,
-    #test-wrap3 ~ div .container {
+    #test-wrap .container, .test-wrap2 ~ .container, #test-wrap3 ~ div .container {
         padding: 10px 5px 18px
     }
 
-    #test-wrap .package + .package,
-    .test-wrap2 ~ .package + .package,
-    #test-wrap3 ~ div .package + .package {
+    #test-wrap .package + .package, .test-wrap2 ~ .package + .package, #test-wrap3 ~ div .package + .package {
         margin-left: 0
     }
 
-    #test-wrap .package__title,
-    .test-wrap2 ~ .package__title,
-    #test-wrap3 ~ div .package__title {
+    #test-wrap .package__title, .test-wrap2 ~ .package__title, #test-wrap3 ~ div .package__title {
         font-size: 1.5rem
     }
 }

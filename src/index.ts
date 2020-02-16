@@ -1,11 +1,8 @@
 import PostCSS, { Rule } from 'postcss';
-import { IOptions, IWrapSelector } from './types';
+import { IHandleRootTags, IOptions } from './types';
 
-const checkParameters = (
-    wrapSelector: IWrapSelector,
-    { isReplaceRootTags }: IOptions,
-): void => {
-    if (typeof wrapSelector !== 'string' || !Array.isArray(wrapSelector)) {
+const checkParameters = ({ wrapSelector, handleRootTags }: IOptions): void => {
+    if (typeof wrapSelector !== 'string' && !Array.isArray(wrapSelector)) {
         throw new Error(
             'postcss-wrap-plugin: wrapSelector option should be of type a string or an array.',
         );
@@ -15,45 +12,62 @@ const checkParameters = (
         throw new Error('postcss-wrap-plugin: empty wrapSelector option.');
     }
 
-    if (typeof isReplaceRootTags !== 'boolean') {
+    if (handleRootTags && typeof handleRootTags !== 'string') {
         throw new Error(
-            'postcss-wrap-plugin: isReplaceRootTags option should be a boolean.',
+            'postcss-wrap-plugin: handleRootTags option incorrect type.',
         );
     }
-};
+}
+
+const ROOT_TAG_REGEXP = /\b(html|body)\b/g;
 
 class WrapPlugin {
     public wrapSelectors: string[];
-    public isReplaceRootTags: boolean;
+    public handleRootTags: IHandleRootTags | null;
 
-    constructor(wrapSelector: IWrapSelector, options: IOptions = {}) {
-        checkParameters(wrapSelector, options);
+    constructor(options: IOptions) {
+        checkParameters(options);
+
+        const { wrapSelector, handleRootTags } = options;
 
         this.wrapSelectors = Array.isArray(wrapSelector)
             ? wrapSelector
             : [wrapSelector];
-        this.isReplaceRootTags = options.isReplaceRootTags || false;
+        this.handleRootTags = handleRootTags || null;
     }
 
-    checkCssRuleKeyframes(cssRule: Rule): boolean {
+    checkIsCssRuleKeyframes(cssRule: Rule): boolean {
         const { parent } = cssRule;
 
-        return parent.type !== 'atrule' || !parent.name.includes('keyframes');
+        return parent.type === 'atrule' && parent.name.includes('keyframes');
     }
 
     isRootTag(selector: string): boolean {
-        return selector === 'html' || selector === 'body';
-    }
-
-    addWrapToSelector(selector: string): string {
-        return this.wrapSelectors
-            .map((wrapSelector: string) => wrapSelector + ' ' + selector)
-            .join(', ');
+        return ROOT_TAG_REGEXP.test(selector);
     }
 
     addWrapToRootSelector(selector: string): string {
         return this.wrapSelectors
-            .map((wrapSelector: string) => wrapSelector + '.' + selector)
+            .map((wrapSelector: string) => {
+                if (this.handleRootTags === IHandleRootTags['remove']) {
+                    return (
+                        wrapSelector +
+                        selector.replace(ROOT_TAG_REGEXP, '').trim()
+                    );
+                }
+
+                if (this.handleRootTags === IHandleRootTags['replace']) {
+                    return `${wrapSelector}.${selector}`;
+                }
+
+                throw new Error('Incorrect value for handleRootTags options');
+            })
+            .join(', ');
+    }
+
+    addWrapToSelector(selector: string): string {
+        return this.wrapSelectors
+            .map((wrapSelector: string) => `${wrapSelector} ${selector}`)
             .join(', ');
     }
 
@@ -62,7 +76,7 @@ class WrapPlugin {
             return null;
         }
 
-        if (this.isRootTag(selector) && this.isReplaceRootTags) {
+        if (this.isRootTag(selector) && this.handleRootTags) {
             return this.addWrapToRootSelector(selector);
         }
 
@@ -79,7 +93,7 @@ class WrapPlugin {
 
     checkIncludeCssRule(cssRule: Rule): boolean {
         // Do not prefix keyframes rules.
-        if (this.checkCssRuleKeyframes(cssRule)) {
+        if (this.checkIsCssRuleKeyframes(cssRule)) {
             return false;
         }
 
