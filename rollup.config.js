@@ -12,7 +12,6 @@ export default {
         {
             file: pkg.main,
             format: 'cjs',
-            preserveModules: false,
             sourcemap: true,
         },
         {
