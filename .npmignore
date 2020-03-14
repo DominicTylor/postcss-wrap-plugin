@@ -2,4 +2,13 @@
 *.log
 .idea
 .git
-coverage
+/coverage
+/src
+/tests
+.eslintignore
+.eslintrc.js
+.gitignore
+.travis.yml
+jest.config.js
+rollup.config.js
+tsconfig.json
