@@ -2,7 +2,7 @@ module.exports = {
     'Test wrap common selectors': {
         message: 'Check correct wrap common selectors',
         options: {
-            wrapSelector: ['.test-wrap1', '[test-wrap="2"]']
+            wrapSelector: ['.test-wrap1', '[test-wrap="2"]'],
         },
         source: 'source/wrap-common-selectors.css',
         expect: 'expect/wrap-common-selectors.css',
