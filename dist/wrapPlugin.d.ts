@@ -6,11 +6,11 @@ export declare class WrapPlugin implements Plugin {
     private handleRootTags;
     constructor(options: IOptions);
     Rule: (cssRule: Rule) => void;
-    _checkIncludeCssRule(cssRule: Rule): boolean;
-    _checkIsCssRuleKeyframes({ parent }: Rule): boolean;
-    _isRootTag(selector: string): boolean;
-    _addWrapToRootSelector(selector: string): string;
-    _addWrapToSelector(selector: string): string;
-    _wrapCSSSelector(selector: string): string | null;
-    _wrapCssRuleSelector(cssRuleSelector: string): string;
+    private checkIncludeCssRule;
+    private checkIsCssRuleKeyframes;
+    private isRootTag;
+    private addWrapToRootSelector;
+    private addWrapToSelector;
+    private wrapCSSSelector;
+    private wrapCssRuleSelector;
 }

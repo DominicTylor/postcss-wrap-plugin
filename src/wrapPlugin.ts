@@ -39,21 +39,21 @@ export class WrapPlugin implements Plugin {
     }
 
     public Rule = (cssRule: Rule): void => {
-        if (this._checkIncludeCssRule(cssRule)) {
-            cssRule.selector = this._wrapCssRuleSelector(cssRule.selector);
+        if (this.checkIncludeCssRule(cssRule)) {
+            cssRule.selector = this.wrapCssRuleSelector(cssRule.selector);
         }
     };
 
-    _checkIncludeCssRule(cssRule: Rule): boolean {
+    private checkIncludeCssRule(cssRule: Rule): boolean {
         // Do not prefix keyframes rules.
-        if (this._checkIsCssRuleKeyframes(cssRule)) {
+        if (this.checkIsCssRuleKeyframes(cssRule)) {
             return false;
         }
 
         return true;
     }
 
-    _checkIsCssRuleKeyframes({ parent }: Rule): boolean {
+    private checkIsCssRuleKeyframes({ parent }: Rule): boolean {
         if (parent && isAtRule(parent)) {
             return parent.name.includes('keyframes');
         }
@@ -61,13 +61,13 @@ export class WrapPlugin implements Plugin {
         return false;
     }
 
-    _isRootTag(selector: string): boolean {
+    private isRootTag(selector: string): boolean {
         ROOT_TAG_REGEXP.lastIndex = 0;
 
         return ROOT_TAG_REGEXP.test(selector);
     }
 
-    _addWrapToRootSelector(selector: string): string {
+    private addWrapToRootSelector(selector: string): string {
         return this.wrapSelectors
             .map((wrapSelector: string) => {
                 if (this.handleRootTags === IHandleRootTags['remove']) {
@@ -85,28 +85,28 @@ export class WrapPlugin implements Plugin {
             .join(', ');
     }
 
-    _addWrapToSelector(selector: string): string {
+    private addWrapToSelector(selector: string): string {
         return this.wrapSelectors
             .map((wrapSelector: string) => `${wrapSelector} ${selector}`)
             .join(', ');
     }
 
-    _wrapCSSSelector(selector: string): string | null {
+    private wrapCSSSelector(selector: string): string | null {
         if (selector === '') {
             return null;
         }
 
-        if (this._isRootTag(selector) && this.handleRootTags) {
-            return this._addWrapToRootSelector(selector);
+        if (this.isRootTag(selector) && this.handleRootTags) {
+            return this.addWrapToRootSelector(selector);
         }
 
-        return this._addWrapToSelector(selector);
+        return this.addWrapToSelector(selector);
     }
 
-    _wrapCssRuleSelector(cssRuleSelector: string): string {
+    private wrapCssRuleSelector(cssRuleSelector: string): string {
         return cssRuleSelector
             .split(',')
-            .map((selector: string) => this._wrapCSSSelector(selector.trim()))
+            .map((selector: string) => this.wrapCSSSelector(selector.trim()))
             .filter((cssSelector: string | null) => cssSelector)
             .join(', ');
     }
