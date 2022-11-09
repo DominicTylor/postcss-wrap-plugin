@@ -1,7 +1,7 @@
 {
   "name": "postcss-wrap-plugin",
   "author": "dominictylor13@gmail.com",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Postcss plugin for add wrapper to your styles",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -30,7 +30,7 @@
     "webpack"
   ],
   "peerDependencies": {
-    "postcss": "*"
+    "postcss": "^8.0.0"
   },
   "devDependencies": {
     "@types/jest": "25.1.4",
@@ -42,8 +42,8 @@
     "husky": "4.2.3",
     "jest": "25.1.0",
     "lint-staged": "10.0.8",
-    "postcss": "7.0.27",
-    "postcss-tape": "5.0.2",
+    "postcss": "8.4.18",
+    "postcss-tape": "6.0.1",
     "prettier": "1.19.1",
     "rollup": "2.0.6",
     "rollup-plugin-cleanup": "3.1.1",

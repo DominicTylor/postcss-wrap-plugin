@@ -1,4 +1,6 @@
-import PostCSS, { Rule } from 'postcss';
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+
+import PostCSS from 'postcss';
 
 import { WrapPlugin } from './wrapPlugin';
 import { IHandleRootTags } from './types';
@@ -6,47 +8,37 @@ import { IHandleRootTags } from './types';
 describe('WrapPlugin tests', () => {
     const wrapSelector = '.my-custom-wrap';
 
-    it('WrapPlugin.runWrap() correct wrap elements', () => {
-        const plugin = new WrapPlugin({ wrapSelector });
-        const cssContainer = PostCSS.rule({
-            selector: 'body',
-        });
-        const selectors = ['div', '#id', '.class'];
+    it('WrapPlugin wraps elements correctly', async () => {
+        const input = `
+            body { color: black; }
+            .test-class { color: black; }
+            #test-id { color: black }
+            
+            @charset "UTF-8";
+            @keyframes mymove {
+                50% { top: 5px; }
+            };
+            @media only screen and (max-width: 600px) {
+                div.test-class { color: red; }
+            };
+        `;
 
-        selectors.map(selector =>
-            cssContainer.append({
-                selector,
-            }),
-        );
+        const result = await PostCSS()
+            .use(new WrapPlugin({ wrapSelector }))
+            .process(input, { from: undefined });
 
-        plugin.checkIncludeCssRule = (): boolean => false;
+        expect(result.css).toContain(`${wrapSelector} body`);
+        expect(result.css).toContain(`${wrapSelector} .test-clas`);
+        expect(result.css).toContain(`${wrapSelector} #test-id`);
+        expect(result.css).toContain(`${wrapSelector} div.test-class`);
 
-        plugin.runWrap()(cssContainer);
-
-        selectors.forEach((selector, index) => {
-            const cssRule = cssContainer.nodes && cssContainer.nodes[index];
-
-            if (cssRule && 'selector' in cssRule) {
-                expect(cssRule.selector).toStrictEqual(selector);
-            }
-        });
-
-        plugin.checkIncludeCssRule = (): boolean => true;
-
-        plugin.runWrap()(cssContainer);
-
-        selectors.forEach((selector, index) => {
-            const cssRule = cssContainer.nodes && cssContainer.nodes[index];
-
-            if (cssRule && 'selector' in cssRule) {
-                expect(cssRule.selector).toStrictEqual(
-                    `${wrapSelector} ${selector}`,
-                );
-            }
-        });
+        expect(result.css).not.toContain(`${wrapSelector} @charset`);
+        expect(result.css).not.toContain(`${wrapSelector} @keyframes`);
+        expect(result.css).not.toContain(`${wrapSelector} 50%`);
+        expect(result.css).not.toContain(`${wrapSelector} @media`);
     });
 
-    it('WrapPlugin check params test', () => {
+    it('WrapPlugin check params', () => {
         try {
             new WrapPlugin({
                 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -83,40 +75,7 @@ describe('WrapPlugin tests', () => {
         }
     });
 
-    it('WrapPlugin checkIsCssRuleKeyframes test', () => {
-        const plugin = new WrapPlugin({ wrapSelector });
-        const cssContainer = PostCSS.rule({
-            selector: 'div',
-        });
-
-        cssContainer.append({
-            selector: 'a',
-        });
-
-        let cssRule = cssContainer.nodes && cssContainer.nodes[0];
-
-        if (cssRule) {
-            expect(plugin.checkIsCssRuleKeyframes(cssRule as Rule)).toBeFalsy();
-        }
-
-        const cssContainer2 = PostCSS.atRule({
-            name: '@keyframes',
-        });
-
-        cssContainer2.append({
-            selector: 'a',
-        });
-
-        cssRule = cssContainer2.nodes && cssContainer2.nodes[0];
-
-        if (cssRule) {
-            expect(
-                plugin.checkIsCssRuleKeyframes(cssRule as Rule),
-            ).toBeTruthy();
-        }
-    });
-
-    it('WrapPlugin isRootTags test', () => {
+    it('WrapPlugin.isRootTags test', () => {
         const plugin = new WrapPlugin({ wrapSelector });
         const data = [
             'body',
@@ -129,23 +88,32 @@ describe('WrapPlugin tests', () => {
             '[data-atr] body .class',
         ];
 
+        // @ts-ignore 'cause it's a private method
         expect(plugin.isRootTag(data[0])).toBeTruthy();
+        // @ts-ignore 'cause it's a private method
         expect(plugin.isRootTag(data[1])).toBeTruthy();
+        // @ts-ignore 'cause it's a private method
         expect(plugin.isRootTag(data[2])).toBeFalsy();
+        // @ts-ignore 'cause it's a private method
         expect(plugin.isRootTag(data[3])).toBeFalsy();
+        // @ts-ignore 'cause it's a private method
         expect(plugin.isRootTag(data[4])).toBeFalsy();
+        // @ts-ignore 'cause it's a private method
         expect(plugin.isRootTag(data[5])).toBeFalsy();
+        // @ts-ignore 'cause it's a private method
         expect(plugin.isRootTag(data[6])).toBeTruthy();
+        // @ts-ignore 'cause it's a private method
         expect(plugin.isRootTag(data[7])).toBeTruthy();
     });
 
-    it('WrapPlugin addWrapToRootSelector test', () => {
+    it('WrapPlugin.addWrapToRootSelector test', () => {
         const selector = 'body div';
         let plugin = new WrapPlugin({
             wrapSelector,
             handleRootTags: IHandleRootTags.replace,
         });
 
+        // @ts-ignore 'cause it's a private method
         expect(plugin.addWrapToRootSelector(selector)).toStrictEqual(
             `${wrapSelector}.${selector}`,
         );
@@ -155,6 +123,7 @@ describe('WrapPlugin tests', () => {
             handleRootTags: IHandleRootTags.remove,
         });
 
+        // @ts-ignore 'cause it's a private method
         expect(plugin.addWrapToRootSelector(selector)).toStrictEqual(
             `${wrapSelector} div`,
         );
@@ -162,10 +131,12 @@ describe('WrapPlugin tests', () => {
         try {
             plugin = new WrapPlugin({
                 wrapSelector,
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+
                 // @ts-ignore
                 handleRootTags: 'wrong',
             });
+
+            // @ts-ignore 'cause it's a private method
             plugin.addWrapToRootSelector(selector);
         } catch (e) {
             expect(e.message).toStrictEqual(
@@ -174,45 +145,52 @@ describe('WrapPlugin tests', () => {
         }
     });
 
-    it('WrapPlugin addWrapToSelector test', () => {
+    it('WrapPlugin.addWrapToSelector test', () => {
         const selector = 'body div';
         const plugin = new WrapPlugin({
             wrapSelector,
             handleRootTags: IHandleRootTags.replace,
         });
 
+        // @ts-ignore 'cause it's a private method
         expect(plugin.addWrapToSelector(selector)).toStrictEqual(
             `${wrapSelector} ${selector}`,
         );
     });
 
-    it('WrapPlugin wrapCSSSelector test', () => {
+    it('WrapPlugin.wrapCSSSelector test', () => {
         const plugin = new WrapPlugin({
             wrapSelector,
             handleRootTags: IHandleRootTags.replace,
         });
 
+        // @ts-ignore 'cause it's a private method
         plugin.addWrapToRootSelector = (): string => 'root wrapped';
+        // @ts-ignore 'cause it's a private method
         plugin.addWrapToSelector = (): string => 'common wrapped';
 
+        // @ts-ignore 'cause it's a private method
         expect(plugin.wrapCSSSelector('')).toStrictEqual(null);
+        // @ts-ignore 'cause it's a private method
         expect(plugin.wrapCSSSelector('body')).toStrictEqual('root wrapped');
+        // @ts-ignore 'cause it's a private method
         expect(plugin.wrapCSSSelector('#id')).toStrictEqual('common wrapped');
     });
 
-    it('WrapPlugin addWrapToSelector test', () => {
+    it('WrapPlugin.addWrapToSelector test', () => {
         const selector = 'body div';
         const plugin = new WrapPlugin({
             wrapSelector,
             handleRootTags: IHandleRootTags.replace,
         });
 
+        // @ts-ignore 'cause it's a private method
         expect(plugin.addWrapToSelector(selector)).toStrictEqual(
             `${wrapSelector} ${selector}`,
         );
     });
 
-    it('WrapPlugin checkIncludeCssRule test', () => {
+    it('WrapPlugin.checkIncludeCssRule test', () => {
         const plugin = new WrapPlugin({
             wrapSelector,
         });
@@ -220,24 +198,30 @@ describe('WrapPlugin tests', () => {
             selector: 'div',
         });
 
+        // @ts-ignore 'cause it's a private method
         plugin.checkIsCssRuleKeyframes = (): boolean => true;
+        // @ts-ignore 'cause it's a private method
         expect(plugin.checkIncludeCssRule(cssRule)).toBeFalsy();
 
+        // @ts-ignore 'cause it's a private method
         plugin.checkIsCssRuleKeyframes = (): boolean => false;
+        // @ts-ignore 'cause it's a private method
         expect(plugin.checkIncludeCssRule(cssRule)).toBeTruthy();
     });
 
-    it('WrapPlugin wrapSelectors test', () => {
+    it('WrapPlugin.wrapSelectors test', () => {
         let plugin = new WrapPlugin({
             wrapSelector,
         });
 
+        // @ts-ignore 'cause it's a private variable
         expect(plugin.wrapSelectors).toStrictEqual([wrapSelector]);
 
         plugin = new WrapPlugin({
             wrapSelector: [wrapSelector, wrapSelector],
         });
 
+        // @ts-ignore 'cause it's a private variable
         expect(plugin.wrapSelectors).toStrictEqual([
             wrapSelector,
             wrapSelector,

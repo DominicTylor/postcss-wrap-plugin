@@ -1,9 +1,12 @@
-import PostCSS from 'postcss';
-import { WrapPlugin } from './wrapPlugin';
-import { IOptions } from './types';
+import { Plugin } from 'postcss';
 
-export default PostCSS.plugin<IOptions>('postcss-wrap-plugin', (...options) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    return new WrapPlugin(...options).runWrap();
-});
+import { IOptions } from './types';
+import { WrapPlugin } from './wrapPlugin';
+
+const creator = (options: IOptions): Plugin => {
+    return new WrapPlugin(options);
+};
+
+creator.postcss = true;
+
+export default creator;

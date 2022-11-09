@@ -1,5 +1,5 @@
-import { Rule } from 'postcss';
-import { IHandleRootTags, IOptions } from './types';
+import { Plugin, Rule } from 'postcss';
+import { IHandleRootTags, IOptions, isAtRule } from './types';
 
 const checkParameters = ({ wrapSelector, handleRootTags }: IOptions): void => {
     if (typeof wrapSelector !== 'string' && !Array.isArray(wrapSelector)) {
@@ -21,9 +21,11 @@ const checkParameters = ({ wrapSelector, handleRootTags }: IOptions): void => {
 
 const ROOT_TAG_REGEXP = /\b(html|body)\b/g;
 
-export class WrapPlugin {
-    public wrapSelectors: string[];
-    public handleRootTags: IHandleRootTags | null;
+export class WrapPlugin implements Plugin {
+    public postcssPlugin = 'postcss-wrap-plugin';
+
+    private wrapSelectors: string[];
+    private handleRootTags: IHandleRootTags | null;
 
     constructor(options: IOptions) {
         checkParameters(options);
@@ -36,19 +38,36 @@ export class WrapPlugin {
         this.handleRootTags = handleRootTags || null;
     }
 
-    checkIsCssRuleKeyframes(cssRule: Rule): boolean {
-        const { parent } = cssRule;
+    public Rule = (cssRule: Rule): void => {
+        if (this.checkIncludeCssRule(cssRule)) {
+            cssRule.selector = this.wrapCssRuleSelector(cssRule.selector);
+        }
+    };
 
-        return parent.type === 'atrule' && parent.name.includes('keyframes');
+    private checkIncludeCssRule(cssRule: Rule): boolean {
+        // Do not prefix keyframes rules.
+        if (this.checkIsCssRuleKeyframes(cssRule)) {
+            return false;
+        }
+
+        return true;
     }
 
-    isRootTag(selector: string): boolean {
+    private checkIsCssRuleKeyframes({ parent }: Rule): boolean {
+        if (parent && isAtRule(parent)) {
+            return parent.name.includes('keyframes');
+        }
+
+        return false;
+    }
+
+    private isRootTag(selector: string): boolean {
         ROOT_TAG_REGEXP.lastIndex = 0;
 
         return ROOT_TAG_REGEXP.test(selector);
     }
 
-    addWrapToRootSelector(selector: string): string {
+    private addWrapToRootSelector(selector: string): string {
         return this.wrapSelectors
             .map((wrapSelector: string) => {
                 if (this.handleRootTags === IHandleRootTags['remove']) {
@@ -66,13 +85,13 @@ export class WrapPlugin {
             .join(', ');
     }
 
-    addWrapToSelector(selector: string): string {
+    private addWrapToSelector(selector: string): string {
         return this.wrapSelectors
             .map((wrapSelector: string) => `${wrapSelector} ${selector}`)
             .join(', ');
     }
 
-    wrapCSSSelector(selector: string): string | null {
+    private wrapCSSSelector(selector: string): string | null {
         if (selector === '') {
             return null;
         }
@@ -84,32 +103,11 @@ export class WrapPlugin {
         return this.addWrapToSelector(selector);
     }
 
-    wrapCssRuleSelector(cssRuleSelector: string): string {
+    private wrapCssRuleSelector(cssRuleSelector: string): string {
         return cssRuleSelector
             .split(',')
             .map((selector: string) => this.wrapCSSSelector(selector.trim()))
             .filter((cssSelector: string | null) => cssSelector)
             .join(', ');
-    }
-
-    checkIncludeCssRule(cssRule: Rule): boolean {
-        // Do not prefix keyframes rules.
-        if (this.checkIsCssRuleKeyframes(cssRule)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    runWrap() {
-        return (css: Rule): boolean | void => {
-            css.walkRules((cssRule: Rule) => {
-                if (this.checkIncludeCssRule(cssRule)) {
-                    const { selector } = cssRule;
-
-                    cssRule.selector = this.wrapCssRuleSelector(selector);
-                }
-            });
-        };
     }
 }

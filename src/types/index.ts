@@ -1,3 +1,5 @@
+import { AtRule, Container } from 'postcss';
+
 export type IWrapSelector = string | string[];
 
 export enum IHandleRootTags {
@@ -7,4 +9,8 @@ export enum IHandleRootTags {
 export type IOptions = {
     wrapSelector: IWrapSelector;
     handleRootTags?: IHandleRootTags;
+};
+
+export const isAtRule = (rule: Container): rule is AtRule => {
+    return rule.type === 'atrule';
 };

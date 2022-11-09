@@ -1,15 +1,16 @@
-import { Rule } from 'postcss';
-import { IHandleRootTags, IOptions } from './types';
-export declare class WrapPlugin {
-    wrapSelectors: string[];
-    handleRootTags: IHandleRootTags | null;
+import { Plugin, Rule } from 'postcss';
+import { IOptions } from './types';
+export declare class WrapPlugin implements Plugin {
+    postcssPlugin: string;
+    private wrapSelectors;
+    private handleRootTags;
     constructor(options: IOptions);
-    checkIsCssRuleKeyframes(cssRule: Rule): boolean;
-    isRootTag(selector: string): boolean;
-    addWrapToRootSelector(selector: string): string;
-    addWrapToSelector(selector: string): string;
-    wrapCSSSelector(selector: string): string | null;
-    wrapCssRuleSelector(cssRuleSelector: string): string;
-    checkIncludeCssRule(cssRule: Rule): boolean;
-    runWrap(): (css: Rule) => boolean | void;
+    Rule: (cssRule: Rule) => void;
+    private checkIncludeCssRule;
+    private checkIsCssRuleKeyframes;
+    private isRootTag;
+    private addWrapToRootSelector;
+    private addWrapToSelector;
+    private wrapCSSSelector;
+    private wrapCssRuleSelector;
 }
